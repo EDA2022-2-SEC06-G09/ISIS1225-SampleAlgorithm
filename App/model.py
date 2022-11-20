@@ -29,7 +29,8 @@ from DISClib.ADT import map as m
 from DISClib.ADT import list as lt
 from DISClib.Algorithms.Graphs import scc
 from DISClib.Algorithms.Graphs import dijsktra as djk
-# TODO Lab 11, agregar importaciones dfs y bfs
+from DISClib.Algorithms.Graphs import bfs
+from DISClib.Algorithms.Graphs import dfs
 from DISClib.Utils import error as error
 assert config
 
@@ -215,12 +216,11 @@ def searchPaths(analyzer, initialStation, method):
     Returns:
         dict: devuelve el analyzer del modelo
     """
-    # TODO Lab 11, ejectutar DepthFirstSearch de dfs
     if method == "dfs":
-        pass
-    # TODO Lab 11, ejectutar BreadhtFisrtSearch de bfs
+        dfs.DepthFirstSearch(analyzer.get('connections'),initialStation)
     elif method == "bfs":
-        pass
+        bfs.BreadhtFisrtSearch(analyzer.get('connections'),initialStation)
+
     return analyzer
 
 
@@ -234,11 +234,15 @@ def hasSearchPath(analyzer, destStation, method):
         destStation (vertice): estacion de destino para el recorrido
         method (str, optional): algoritmo de busqueda. Por defecto es "dfs"
     """
-    # TODO Lab 11, ejectutar hasPathTo por dfs
     if method == "dfs":
+
+        dfs.hasPathTo(analyzer.get('connections'),destStation)
+
         return None
-    # TODO Lab 11, ejectutar hasPathTo por bfs
     elif method == "bfs":
+
+        bfs.hasPathTo(analyzer.get('connections'),destStation)
+
         return None
 
 
@@ -256,12 +260,10 @@ def searchPathTo(analyzer, destStation, method):
         stack: devuele una pila con el camino encontrado en la busqueda.
     """
     path = None
-    # TODO Lab 11, ejectutar pathTo por dfs
     if method == "dfs":
-        pass
-    # TODO Lab 11, ejectutar pathTo por bfs
+        path = dfs.pathTo(analyzer.get('connections'),destStation)
     elif method == "bfs":
-        pass
+        path = bfs.pathTo(analyzer.get('connections'),destStation)
     return path
 
 

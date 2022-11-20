@@ -56,7 +56,6 @@ searchMethod = None
 def printMenu():
     print("\n")
     print("*******************************************")
-    # TODO Lab 11, asegurarse de completar las opciones 4, 9 y 10
     print("Bienvenido")
     print("1- Inicializar Analizador")
     print("2- Cargar información de buses de singapur")
@@ -94,8 +93,10 @@ def optionFour(cont, initialStation):
 
 
 def optionFive(cont, initialStation, searchMethod):
-    # TODO Lab 11, conectar con la funcion del controller searchPaths
-    pass
+    
+    print('Calculando caminos')
+    controller.searchPaths(cont,initialStation,searchMethod)
+    
 
 
 def optionSix(cont, destStation):
@@ -124,14 +125,15 @@ def optionEight(cont):
 
 
 def optionNine(cont, destStation, searchMethod):
-    # TODO Lab 11, conectar con la funcion del controller hasSearchPath
-    haspath = None
+                
+    haspath = controller.hasSearchPath(cont,destStation,searchMethod)
+    
     print(haspath)
 
 
 def optionTen(cont, destStation, searchMethod):
-    # TODO Lab 11, conectar con la funcion del controller searchPath
-    path = None
+    
+    path = controller.searchPaths(cont,destStation,searchMethod)
     if path is not None:
         pass
     else:
@@ -165,8 +167,20 @@ def thread_cycle():
             optionFour(cont, initialStation)
 
         elif int(inputs) == 5:
-            # TODO Lab 11, completar inputs opt 5, searchMethod, initialStation
-            pass
+
+            initialStation = input('Ingrese la estacion inicial')
+            searchMethod = input('\nSeleccione un search method \n1. dfs\n2. bfs')
+
+            if int(searchMethod[0]) == 1: 
+
+                searchMethod = 'dfs'
+
+            elif int(searchMethod[0]) == 2: 
+
+                searchMethod = 'bfs'
+
+            optionFive(cont,initialStation,searchMethod)
+            
 
         elif int(inputs) == 6:
             destStation = input("Estación destino (Ej: 15151-10): ")
@@ -180,12 +194,35 @@ def thread_cycle():
             optionEight(cont)
 
         elif int(inputs) == 9:
-            # TODO Lab 11, completar inputs opt 9, destStation
-            pass
+
+            searchMethod = input('Seleccione un search method \n1. dfs\n2. bfs')
+
+            if int(searchMethod[0]) == 1: 
+
+                searchMethod = 'dfs'
+
+            elif int(searchMethod[0]) == 2: 
+
+                searchMethod = 'bfs'
+
+            optionNine(cont,destStation,searchMethod)
+            
 
         elif int(inputs) == 10:
-            # TODO Lab 11, completar inputs opt 10, destStation
-            pass
+            
+            destStation = input("Estación destino (Ej: 15151-10): \n")
+
+            searchMethod = input('Seleccione un search method \n1. dfs\n2. bfs')
+
+            if int(searchMethod[0]) == 1: 
+
+                searchMethod = 'dfs'
+
+            elif int(searchMethod[0]) == 2: 
+
+                searchMethod = 'bfs'
+            
+            optionTen(cont,destStation,searchMethod)
 
         else:
             sys.exit(0)
